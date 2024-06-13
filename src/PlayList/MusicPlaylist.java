@@ -7,15 +7,26 @@ import java.util.Comparator;
 
 public class MusicPlaylist {
     private HashMap<String, Song> playlist;  // 곡 제목을 키로 사용하여 곡 정보를 저장하는 HashMap
-    private TreeSet<Song> sortedByTitle;     // 곡 제목으로 정렬된 TreeSet
-    private TreeSet<Song> sortedByArtist;    // 아티스트로 정렬된 TreeSet
+    private TreeSet<Song> sortedByTitle;     // 곡 제목으로 정렬 TreeSet
+    private TreeSet<Song> sortedByArtist;    // 아티스트로 정렬 TreeSet
+    private Song[] songArray;                // 곡들을 저장할 배열
+    private int currentIndex;                // 배열에 곡을 추가할 현재 인덱스
 
     // 생성자
-    public MusicPlaylist() {
+    public MusicPlaylist(Song[] initialSongs) {
         playlist = new HashMap<>();
         // 내부적으로 전달 받은 Function으로 값을 추출하여 비교하는 Comparator를 반환
         sortedByTitle = new TreeSet<>(Comparator.comparing(Song::getTitle));
         sortedByArtist = new TreeSet<>(Comparator.comparing(Song::getArtist));
+        songArray = initialSongs;
+
+        for (Song song : initialSongs) { //초기 곡 데이터 배열(initialSongs)에 있는 곡들을 HashMap과 TreeSet에 추가
+            if (song != null) {
+                playlist.put(song.getTitle(), song);
+                sortedByTitle.add(song);
+                sortedByArtist.add(song);
+            }
+        }
     }
 
     // 곡을 플레이리스트에 추가 (중복 방지)
@@ -24,6 +35,12 @@ public class MusicPlaylist {
             playlist.put(song.getTitle(), song);
             sortedByTitle.add(song);
             sortedByArtist.add(song);
+            // 배열 추가 구현 부분
+            if (currentIndex < songArray.length) {
+                songArray[currentIndex++] = song;
+            } else {
+                System.out.println("재생 목록이 가득 찼습니다. 곡을 추가할 수 없습니다.");
+            }
         } else {
             System.out.println("재생 목록에 노래가 이미 존재합니다.");
         }
@@ -35,6 +52,13 @@ public class MusicPlaylist {
         if (song != null) {
             sortedByTitle.remove(song);
             sortedByArtist.remove(song);
+            // 배열 추가 구현 부분
+            for (int i = 0; i < currentIndex; i++) {
+                if (songArray[i] != null && songArray[i].getTitle().equals(title)) {
+                    songArray[i] = null;
+                    break;
+                }
+            }
         }
     }
 
@@ -56,6 +80,15 @@ public class MusicPlaylist {
     public void playlistByArtist() {
         for (Song song : sortedByArtist) {
             System.out.println(song);
+        }
+    }
+
+    // 배열에 저장된 곡들을 출력
+    public void displaySongArray() {
+        for (Song song : songArray) {
+            if (song != null) {
+                System.out.println(song);
+            }
         }
     }
 
