@@ -1,10 +1,10 @@
 package PlayList;
 
 public class Song {
-    private String title;  // 곡 제목
-    private String artist; // 아티스트
-    private String album;  // 앨범
-    private int duration;  // 재생 시간 (초 단위)
+    private final String title;  // 곡 제목
+    private final String artist; // 아티스트
+    private final String album;  // 앨범
+    private final int duration;  // 재생 시간 (초 단위)
 
     // 생성자
     public Song(final String title, final String artist, final String album, final int duration) {
@@ -21,10 +21,6 @@ public class Song {
 
     public String getArtist() {
         return artist;
-    }
-
-    public String getAlbum() {
-        return album;
     }
 
     public int getDuration() {
