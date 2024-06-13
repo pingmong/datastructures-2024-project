@@ -12,7 +12,7 @@
 - 노래의 멤버 변수들을 String으로 바꿔서 출력
 
 ### MusicPlayist
-- 
+
 
 
 ### Main
