@@ -45,8 +45,6 @@
 - **설명**:
   사용자가 입력하는 숫자에 따라 기능을 실행합니다. 초기 곡 데이터를 배열로 저장하여 시작합니다.
 
-
-
-![img.png](img.png)
+<img width="267" alt="image" src="https://github.com/pingmong/datastructures-2024-project/assets/131340640/c68905df-780d-441d-9fa0-0d00ab861f46">
 
 
